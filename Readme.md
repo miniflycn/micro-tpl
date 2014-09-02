@@ -1,4 +1,4 @@
 micro-tpl
 =========
 
-Modified from grunt-yomb(MIT) and Used in QQEDU projects. 
+Reference from grunt-yomb(MIT) and Used in QQEDU projects. 

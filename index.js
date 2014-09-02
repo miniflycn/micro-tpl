@@ -1,5 +1,5 @@
 /**
- * Modified from grunt-yomb
+ * Reference from grunt-yomb
  */
 'use strict';
 var EOL = '\n';
