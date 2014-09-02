@@ -1,0 +1,22 @@
+{
+  "name": "micro-tpl",
+  "version": "0.1.0",
+  "description": "just a micro template",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "template"
+  ],
+  "author": "Daniel Yang <miniflycn@justany.net>",
+  "license": "MIT"
+}
