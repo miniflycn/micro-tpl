@@ -1,6 +1,7 @@
 var analyse = require('../lib/analyse')
   , fs = require('fs')
-  , path = require('path');
+  , path = require('path')
+  , should = require('should');
 
 describe('analyse', function () {
   it('should able to check no close tempalate', function () {

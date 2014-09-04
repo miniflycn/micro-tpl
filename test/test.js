@@ -1,6 +1,7 @@
 var tpl = require('../')
   , fs = require('fs')
-  , path = require('path');
+  , path = require('path')
+  , should = require('should');
 
 function call(foo, it, opt) {
   return eval('(' + foo + ')(it, opt)');
