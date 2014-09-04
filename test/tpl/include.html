@@ -3,7 +3,7 @@ var item;
 for (var i = 0, l = items.length; i < l; i++) {
 item = items[i];
 %>
-<%~'./it.html'(item)%>
+<%=include('./it.html')(item)%>
 <%
 }
 %>

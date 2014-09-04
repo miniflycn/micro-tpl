@@ -23,14 +23,14 @@ function build(tmpl, opt) {
         return $0.replace(/('|\\)/g, "\\$1").replace(/[\v\t]/g, "").replace(/\s+/g, " ")
       })
       .replace(/[\v]/g, EOL)
-      .replace(/<%==(.*?)%>/g, "', opt.encodeHtml($1), '")
-      .replace(/<%=(.*?)%>/g, "', $1, '")
-      .replace(/<%~(['"])(.*?)\1(\(.*?\))%>/g, function ($0, $1, $2, $3) {
+      .replace(/<%=include\((['"])(.*?)\1\)(\(.*?\))%>/g, function ($0, $1, $2, $3) {
         var file = path.join(path.dirname(opt.path), $2)
           , newOpt = merge({}, opt);
         newOpt.path = file;
         return "', " + build(fs.readFileSync(file, { encoding: 'utf8' }), newOpt) + $3 + ", '";
       })
+      .replace(/<%==(.*?)%>/g, "', opt.encodeHtml($1), '")
+      .replace(/<%=(.*?)%>/g, "', $1, '")
       .replace(/<%(<-)?/g, "');" + EOL + "      ")
       .replace(/->(\w+)%>/g, EOL + "      $1.push('")
       .split("%>").join(EOL + "      _$out_.push('") + "');",
