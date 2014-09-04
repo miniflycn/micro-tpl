@@ -27,4 +27,4 @@ console.log('hello world');
 ```html
 <%=include('./tpl.html')(data)%>
 ```
-会include相对于本模版的tpl.html文件
+会include相对于本模版的tpl.html文件，可以多重include，但是请不要循环include。

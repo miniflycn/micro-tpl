@@ -40,4 +40,14 @@ describe('micro-tpl', function () {
     call(foo, { items: [{ say: 'hello' }, { say: 'tencent' }, { say: 'qqedu' }] })
       .should.equal('<p>hello</p><p>tencent</p><p>qqedu</p>');
   });
+
+  it('should able to deep include', function () {
+    var p = path.join(__dirname, './tpl/deepInclude.html')
+      , foo = tpl(
+      fs.readFileSync(p, {  encoding: 'utf8' }),
+      { path: p }
+    );
+    call(foo, { items: [{ say: 'hello' }, { say: 'tencent' }, { say: 'qqedu' }] })
+      .should.equal('<p>hello</p><p>tencent</p><p>qqedu</p>');
+  });
 });
