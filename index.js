@@ -17,7 +17,7 @@ function build(tmpl, opt) {
   if (opt.safe) {
     try {
       analyse(tmpl)
-    } catch(e) {
+    } catch (e) {
       throw new Error('file: ' + opt.path + ', ' + e);
     }
   } 
