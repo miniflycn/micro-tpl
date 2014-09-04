@@ -1,5 +1,5 @@
 /**
- * Reference from grunt-yomb
+ * Modified from grunt-yomb
  */
 'use strict';
 
