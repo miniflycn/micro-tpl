@@ -10,6 +10,8 @@
     "utils-merge": "*"
   },
   "devDependencies": {
+    "gulp": "*",
+    "gulp-jscs": "*",
     "mocha": "*",
     "should": "*"
   },

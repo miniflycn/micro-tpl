@@ -19,7 +19,7 @@ function build(tmpl, opt) {
     "        var _$out_= [];",
     "        _$out_.push('" + tmpl
       .replace(/\r\n|\n|\r/g, "\v")
-      .replace(/(?:^|%>).*?(?:<%|$)/g, function($0) {
+      .replace(/(?:^|%>).*?(?:<%|$)/g, function ($0) {
         return $0.replace(/('|\\)/g, "\\$1").replace(/[\v\t]/g, "").replace(/\s+/g, " ")
       })
       .replace(/[\v]/g, EOL)
