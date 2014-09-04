@@ -1,12 +1,14 @@
 {
   "name": "micro-tpl",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "just a micro template",
   "main": "index.js",
   "files": [
     "index.js"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "utils-merge": "*"
+  },
   "devDependencies": {
     "mocha": "*",
     "should": "*"

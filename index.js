@@ -2,9 +2,14 @@
  * Reference from grunt-yomb
  */
 'use strict';
-var EOL = '\n';
 
-module.exports = function (tmpl, opt) {
+var fs = require('fs')
+  , path = require('path')
+  , merge = require('utils-merge')
+  , EOL = '\n';
+
+function build(tmpl, opt) {
+  opt = opt || {};
   var res = [];
   tmpl.replace(/<\/script>/ig, '</s<%=""%>cript>');
   res.push([
@@ -20,6 +25,12 @@ module.exports = function (tmpl, opt) {
       .replace(/[\v]/g, EOL)
       .replace(/<%==(.*?)%>/g, "', opt.encodeHtml($1), '")
       .replace(/<%=(.*?)%>/g, "', $1, '")
+      .replace(/<%~(['"])(.*?)\1(\(.*?\))%>/g, function ($0, $1, $2, $3) {
+        var file = path.join(path.dirname(opt.path), $2)
+          , newOpt = merge({}, opt);
+        newOpt.path = file;
+        return "', " + build(fs.readFileSync(file, { encoding: 'utf8' }), newOpt) + $3 + ", '";
+      })
       .replace(/<%(<-)?/g, "');" + EOL + "      ")
       .replace(/->(\w+)%>/g, EOL + "      $1.push('")
       .split("%>").join(EOL + "      _$out_.push('") + "');",
@@ -29,4 +40,6 @@ module.exports = function (tmpl, opt) {
   ].join(EOL).replace(/_\$out_\.push\(''\);/g, ''));
 
   return res.join('');
-};
+}
+
+module.exports = build;

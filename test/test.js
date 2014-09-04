@@ -30,4 +30,14 @@ describe('micro-tpl', function () {
     );
     call(foo, { l: 3 }).should.equal('<p>1</p><p>2</p><p>3</p>');
   });
+
+  it('should able to include other template', function () {
+    var p = path.join(__dirname, './tpl/include.html')
+      , foo = tpl(
+      fs.readFileSync(p, {  encoding: 'utf8' }),
+      { path: p }
+    );
+    call(foo, { items: [{ say: 'hello' }, { say: 'tencent' }, { say: 'qqedu' }] })
+      .should.equal('<p>hello</p><p>tencent</p><p>qqedu</p>');
+  });
 });
