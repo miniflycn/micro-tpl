@@ -50,4 +50,48 @@ describe('micro-tpl', function () {
     call(foo, { items: [{ say: 'hello' }, { say: 'tencent' }, { say: 'qqedu' }] })
       .should.equal('<p>hello</p><p>tencent</p><p>qqedu</p>');
   });
+
+  it('should throw a error if trying circular reference', function () {
+    var p = path.join(__dirname, './tpl/circle1.html');
+    tpl.bind(
+      null, 
+      fs.readFileSync(p, {  encoding: 'utf8' }),
+      { path: p }
+    ).should.throw(/circular reference/);
+  });
+
+  it('should able to build a template have a variable "it" strict mode', function () {
+    var foo = tpl(
+      fs.readFileSync(
+        path.join(__dirname, './tpl/it.html'), 
+        { encoding: 'utf8' }
+      ),
+      { strict: true }
+    );
+    call(foo, { say: 'Hello, world!' }).should.equal('<p>Hello, world!</p>');
+  });
+
+  it('should not able to build a template have a variable "say" strict mode', function () {
+    var foo = tpl(
+      fs.readFileSync(
+        path.join(__dirname, './tpl/render.html'), 
+        { encoding: 'utf8' }
+      ),
+      { strict: true }
+    );
+    call.bind(null, foo, { say: 'Hello, world!' })
+      .should.throw(/say is not defined/);
+  });
+
+  it('should throw a error when render a bad template in safe mod', function () {
+    var file = path.join(__dirname, './bad/noclose.html')
+      , foo = tpl.bind(
+      null,
+      fs.readFileSync(
+        file, 
+        { encoding: 'utf8' }
+      ),
+      { safe: true, path: file }
+    ).should.throw();
+  })
 });
