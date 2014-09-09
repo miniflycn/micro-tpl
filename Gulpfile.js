@@ -4,7 +4,7 @@ var gulp = require('gulp')
 
 gulp.task('mocha', function () {
   return gulp.src('./test/*.js', { read: false })
-    .pipe(mocha({ reporter: 'nyan' }));
+    .pipe(mocha({ reporter: 'list' }));
 })
 
 gulp.task('default', ['mocha'], function () {

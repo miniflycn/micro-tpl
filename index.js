@@ -16,9 +16,14 @@ function build(tmpl, opt) {
 
   if (opt.safe) {
     try {
-      analyse(tmpl)
+      analyse(tmpl, opt.path);
     } catch (e) {
-      throw new Error('file: ' + opt.path + ', ' + e);
+      console.log([
+        '',
+        'template must have a error:',
+        e
+      ].join('\n'));
+      throw new Error('template build error.');
     }
   } 
 

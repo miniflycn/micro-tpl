@@ -87,12 +87,12 @@ describe('micro-tpl', function () {
   it('should throw a error when render a bad template in safe mod', function () {
     var file = path.join(__dirname, './bad/noclose.html')
       , foo = tpl.bind(
-      null,
-      fs.readFileSync(
-        file, 
-        { encoding: 'utf8' }
-      ),
-      { safe: true, path: file }
-    ).should.throw();
+        null, 
+        fs.readFileSync(
+          file, 
+          { encoding: 'utf8' }
+        ),
+        { safe: true, path: file }
+      ).should.throw();
   })
 });

@@ -8,9 +8,11 @@
     "lib/**/*.js"
   ],
   "dependencies": {
-    "utils-merge": "*"
+    "utils-merge": "*",
+    "colors": "*"
   },
   "devDependencies": {
+    "colors": "^0.6.2",
     "gulp": "*",
     "gulp-jscs": "*",
     "gulp-mocha": "*",
