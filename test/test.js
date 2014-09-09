@@ -94,5 +94,41 @@ describe('micro-tpl', function () {
         ),
         { safe: true, path: file }
       ).should.throw();
-  })
+  });
+
+  it('should throw a error when use ";" in interpolation', function () {
+    var file = path.join(__dirname, './bad/semicolon.html')
+      , foo = tpl.bind(
+        null, 
+        fs.readFileSync(
+          file, 
+          { encoding: 'utf8' }
+        ),
+        { safe: true, path: file }
+      ).should.throw();
+  });
+
+  it('should throw a error when use multi-lines in interpolation', function () {
+    var file = path.join(__dirname, './bad/multiline.html')
+      , foo = tpl.bind(
+        null, 
+        fs.readFileSync(
+          file, 
+          { encoding: 'utf8' }
+        ),
+        { safe: true, path: file }
+      ).should.throw();
+  });
+
+  it('should throw a error when finding unexpected token', function () {
+    var file = path.join(__dirname, './bad/error.html')
+      , foo = tpl.bind(
+        null, 
+        fs.readFileSync(
+          file, 
+          { encoding: 'utf8' }
+        ),
+        { safe: true, path: file }
+      ).should.throw();
+  });
 });

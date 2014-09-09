@@ -9,7 +9,8 @@
   ],
   "dependencies": {
     "utils-merge": "*",
-    "colors": "*"
+    "colors": "*",
+    "acorn": "*"
   },
   "devDependencies": {
     "colors": "^0.6.2",
