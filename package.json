@@ -1,6 +1,6 @@
 {
   "name": "micro-tpl",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "just a micro template",
   "main": "index.js",
   "files": [
@@ -13,7 +13,6 @@
     "acorn": "*"
   },
   "devDependencies": {
-    "colors": "^0.6.2",
     "gulp": "*",
     "gulp-jscs": "*",
     "gulp-mocha": "*",
