@@ -121,14 +121,24 @@ describe('micro-tpl', function () {
   });
 
   it('should throw a error when finding unexpected token', function () {
-    var file = path.join(__dirname, './bad/error.html')
-      , foo = tpl.bind(
-        null, 
-        fs.readFileSync(
-          file, 
-          { encoding: 'utf8' }
-        ),
-        { safe: true, path: file }
-      ).should.throw();
+    var file1 = path.join(__dirname, './bad/error.html')
+      , file2 = path.join(__dirname, './bad/errorEval.html');
+    tpl.bind(
+      null, 
+      fs.readFileSync(
+        file1, 
+        { encoding: 'utf8' }
+      ),
+      { safe: true, path: file1 }
+    ).should.throw();
+
+    tpl.bind(
+      null,
+      fs.readFileSync(
+        file2, 
+        { encoding: 'utf8' }
+      ),
+      { safe: true, path: file2 }
+    ).should.throw();
   });
 });
