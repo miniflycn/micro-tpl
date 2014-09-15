@@ -83,3 +83,9 @@ console.log('hello world');
 <%=include('./tpl.html')(data)%>
 ```
 会include相对于本模版的tpl.html文件，可以多重include，发生循环引用时会抛出错误。
+
+
+相关插件
+--------
+
+* https://github.com/QQEDU/grunt-imweb-tpl-complie
