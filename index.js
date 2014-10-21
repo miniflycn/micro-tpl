@@ -67,28 +67,4 @@ function build(tmpl, opt) {
     res.join('');
 }
 
-build.__express = function (path, options, fn) {
-  if ('function' == typeof options) {
-    fn = options, options = undefined;
-  }
-  if (typeof fn === 'function') {
-    var res
-    try {
-      res = build(fs.readFileSync(path, 'utf8'), { ret: 'function' });
-    } catch (ex) {
-      return fn(ex);
-    }
-    return fn(null, res);
-  }
-  options = options || {};
-
-  //var key = path + ':string';
-
-  options.ret = 'function';
-  // var str = options.cache
-  //   ? exports.cache[key] || (exports.cache[key] = fs.readFileSync(path, 'utf8'))
-  //   : fs.readFileSync(path, 'utf8');
-  return build(fs.readFileSync(path, 'utf8'), options);
-};
-
 module.exports = build;
