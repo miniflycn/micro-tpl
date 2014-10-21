@@ -12,7 +12,7 @@ var fs = require('fs')
 function build(tmpl, opt) {
   opt = opt || {};
   opt.deps = opt.deps || {};
-  var res = [], strict = opt.strict;
+  var res = [], strict = opt.strict, retFun = opt.ret === 'function';
 
   if (opt.safe) {
     try {
@@ -29,7 +29,7 @@ function build(tmpl, opt) {
 
   tmpl.replace(/<\/script>/ig, '</s<%=""%>cript>');
   res.push([
-    "function (it, opt) {",
+    retFun ? undefined : "function (it, opt) {",
     "    it = it || {};",
     strict ?
       "" :
@@ -59,10 +59,36 @@ function build(tmpl, opt) {
     strict ?
       "" :
       "    }",
-    "}"
+    retFun ? undefined : "}"
   ].join(EOL).replace(/_\$out_\.push\(''\);/g, ''));
 
-  return res.join('');
+  return retFun ? 
+    new Function('it', 'opt', res.join('')) : 
+    res.join('');
 }
+
+build.__express = function (path, options, fn) {
+  if ('function' == typeof options) {
+    fn = options, options = undefined;
+  }
+  if (typeof fn === 'function') {
+    var res
+    try {
+      res = build(fs.readFileSync(path, 'utf8'), { ret: 'function' });
+    } catch (ex) {
+      return fn(ex);
+    }
+    return fn(null, res);
+  }
+  options = options || {};
+
+  //var key = path + ':string';
+
+  options.ret = 'function';
+  // var str = options.cache
+  //   ? exports.cache[key] || (exports.cache[key] = fs.readFileSync(path, 'utf8'))
+  //   : fs.readFileSync(path, 'utf8');
+  return build(fs.readFileSync(path, 'utf8'), options);
+};
 
 module.exports = build;

@@ -141,4 +141,15 @@ describe('micro-tpl', function () {
       { safe: true, path: file2 }
     ).should.throw();
   });
+
+  it('should able to build just function content', function () {
+    var foo = tpl(
+      fs.readFileSync(
+        path.join(__dirname, './tpl/it.html'), 
+        { encoding: 'utf8' }
+      ),
+      { strict: true, ret: 'function' }
+    );
+    foo({ say: 'Hello, world!' }).should.equal('<p>Hello, world!</p>');
+  });
 });
