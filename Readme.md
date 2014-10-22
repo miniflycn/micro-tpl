@@ -58,6 +58,8 @@ var tpl = require('micro-tpl');
 tpl("no<%close", { safe: true, path: '/home/me/bad.html' });
 ```
 
+* ret: 设置引擎编译的结果，默认是`string`，可以使用`function`，则编译后返回函数。
+
 功能介绍
 --------
 
