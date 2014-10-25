@@ -1,6 +1,6 @@
 {
   "name": "micro-tpl",
-  "version": "0.3.5",
+  "version": "0.4.0",
   "description": "just a micro template",
   "repository": "git://github.com/QQEDU/micro-tpl.git",
   "main": "index.js",

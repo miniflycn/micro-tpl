@@ -12,7 +12,10 @@ var fs = require('fs')
 function build(tmpl, opt) {
   opt = opt || {};
   opt.deps = opt.deps || {};
-  var res = [], strict = opt.strict, retFun = opt.ret === 'function';
+  var res = []
+    , strict = opt.strict
+    , retFun = opt.ret === 'function'
+    , type = opt.type || 'html';
 
   if (opt.safe) {
     try {
@@ -38,7 +41,9 @@ function build(tmpl, opt) {
     "        _$out_.push('" + tmpl
       .replace(/\r\n|\n|\r/g, "\v")
       .replace(/(?:^|%>).*?(?:<%|$)/g, function ($0) {
-        return $0.replace(/('|\\)/g, "\\$1").replace(/[\v\t]/g, "").replace(/\s+/g, " ")
+        return type === 'html' ?
+          $0.replace(/('|\\)/g, "\\$1").replace(/[\v\t]/g, "").replace(/\s+/g, " ") :
+          $0.replace(/('|\\)/g, "\\$1").replace(/ +/g, " ").replace(/[\v\t]/g, "', '\\n', '");
       })
       .replace(/<!--[\s\S]+?-->/g, '')
       .replace(/[\v]/g, EOL)
