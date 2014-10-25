@@ -60,6 +60,8 @@ tpl("no<%close", { safe: true, path: '/home/me/bad.html' });
 
 * ret: 设置引擎编译的结果，默认是`string`，可以使用`function`，则编译后返回函数。
 
+* type: 设置模版生成的文件类型，默认是`html`, 可以设置成`javascript`等，则编译后结果会保留换行符。
+
 功能介绍
 --------
 
