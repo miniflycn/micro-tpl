@@ -150,6 +150,18 @@ describe('micro-tpl', function () {
       ),
       { strict: true, ret: 'function' }
     );
-    foo({ say: 'Hello, world!' }).should.equal('<p>Hello, world!</p>');
+  });
+
+  it('should return a function when find a error in the source in `unthrow` model', function () {
+    var file = path.join(__dirname, './bad/error.html')
+      , foo = tpl(
+        fs.readFileSync(
+          file,
+          { encoding: 'utf8' }
+        ),
+        { safe: true, path: file, unthrow: true  }
+      );
+
+    fs.writeFileSync('1.js', foo);
   });
 });

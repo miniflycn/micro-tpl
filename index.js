@@ -9,24 +9,45 @@ var fs = require('fs')
   , analyse = require('./lib/analyse')
   , EOL = '\n';
 
+function encode(str) {
+  return str.replace(/"/g, '%22');
+}
+
 function build(tmpl, opt) {
   opt = opt || {};
   opt.deps = opt.deps || {};
   var res = []
     , strict = opt.strict
     , retFun = opt.ret === 'function'
-    , type = opt.type || 'html';
+    , type = opt.type || 'html'
+    , unthrow = opt.unthrow || false;
 
   if (opt.safe) {
     try {
       analyse(tmpl, opt.path);
     } catch (e) {
-      console.log([
-        '',
-        'template must have a error:',
-        e
-      ].join('\n'));
-      throw new Error('template build error.');
+      if (unthrow) {
+        // res.push(
+        //   retFun ? undefined : "function test() {",
+        //   'console.log("%cUnexpected token at %c/Users/apple/micro-tpl/test/bad/error.html", "color: red; font-weight: bold;", "color: red;");',
+        //   'console.log("%c     1 |%c<% for (var i = 0, l = 10; i < l; i++) %>", "color: grey", "color: #777; font-weight: bold;");',
+        //   'console.log("%c     2 |%chello world", "color: grey", "color: #777; font-weight: bold;");',
+        //   'console.log("%c     3 |%c<% } %>", "color: grey", "color: #777; font-weight: bold;");',
+        //   'console.log("%c-----------^", "color: grey;");',
+        //   retFun ? undefined : "}"
+        // );
+
+        // return retFun ? 
+        //   new Function('it', 'opt', res.join('')) : 
+        //   res.join('');
+      } else {
+        console.log([
+          '',
+          'template must have a error:',
+          e
+        ].join('\n'));
+        throw new Error('template build error.');
+      }
     }
   } 
 
