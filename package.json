@@ -11,7 +11,8 @@
   "dependencies": {
     "utils-merge": "*",
     "colors": "*",
-    "acorn": "*"
+    "acorn": "*",
+    "mocha": "*"
   },
   "devDependencies": {
     "gulp": "*",
