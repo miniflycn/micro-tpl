@@ -1,7 +1,7 @@
 micro-tpl
 =========
 
-[![Build Status](https://travis-ci.org/imweb/micro-tpl.svg?branch=master)](https://travis-ci.org/imweb/micro-tpl)
+[![Build Status](https://travis-ci.org/miniflycn/micro-tpl.svg?branch=master)](https://travis-ci.org/miniflycn/micro-tpl)
 
 > Modified from grunt-yomb(MIT) and Used in QQEDU projects.
 
